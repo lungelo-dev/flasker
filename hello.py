@@ -27,5 +27,16 @@ def user(name):
     #return '<h1>Hello {}</h1>'.format(name)
     return render_template('users.html',user_name=name)
 
+#Invalid URL
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html"),404
+
+# INTERNAL sEVER eRROR
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template("500.html"),500
+
+
 app.config['SECRET_KEY'] = "my super secret key"
 
