@@ -12,8 +12,22 @@ from datetime import date
 #import uuid as uuid
 import os
 
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
+
+
 #create a flask instance
 app = Flask(__name__)
+app.config['SECRET_KEY'] = "my super secret key"
+
+
+#Create a Form Class
+class NamerForm(FlaskForm):
+    name = StringField("What is your name" , validators=[DataRequired()])
+    submit = SubmitField("Submit")
+
+
 
 @app.route('/')
 def index():
@@ -27,6 +41,8 @@ def user(name):
     #return '<h1>Hello {}</h1>'.format(name)
     return render_template('users.html',user_name=name)
 
+
+
 #Invalid URL
 @app.errorhandler(404)
 def page_not_found(e):
@@ -38,5 +54,22 @@ def page_not_found(e):
     return render_template("500.html"),500
 
 
-app.config['SECRET_KEY'] = "my super secret key"
+
+
+
+
+
+#Create Name Page
+@app.route('/name', methods=['GET','POST'])
+def name():
+    name = None
+    form = NamerForm()
+    
+    #Validate the form
+    if form.validate_on_submit():
+        name =  form.name.data
+        form.name.data = ''
+        
+        
+    return render_template("name.html", name=name,form=form)
 
