@@ -3,18 +3,41 @@
 
 {% block content %}
 
+{% for message in get_flashed_messages() %}
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+
+{% endfor %}
+
+
+
 {% if name %}
     <h1> Hello {{ name }} !! </h1>
+    <br/>
+    
+    <img src = "{{ url_for('static',filename='images/lungelo.png') }}" width=1100>
+    <br/><br/>
+
+    <p id = "demo"> This stuff....</p>
+<script src="{{ url_for('static', filename='js/myfile.js')}}" >
+
+
 {% else %}
+
     <h1> What is your name ?</h1>
     <br/>
     <form method ='POST'>
         {{ form.hidden_tag()}}
 
-        {{ form.name.label}}
-        {{ form.name()}}
+        {{ form.name.label(class="form-label")}}
+
+        {{ form.name(class="form-label")}}
         <br/>
-        {{ form.submit()}}
+        {{ form.submit(class="btn btn-secondary")}}
     </form>
 
 

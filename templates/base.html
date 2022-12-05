@@ -1,9 +1,19 @@
-ABOVE<br/><br/>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meat tags-->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-{% block content %}
+    <!-- Points to CSS -->
+    <link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet" >
 
-{% endblock %}
+    <title>Flasker App</title>
+  </head>
 
-<br/><br/>
-
-BELOW
+  <body>
+    {% include 'navbar.html' %}
+    <br />
+    <div class="container">{% block content %} {% endblock %}</div>
+  </body>
+</html>

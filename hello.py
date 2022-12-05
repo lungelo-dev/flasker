@@ -69,6 +69,7 @@ def name():
     if form.validate_on_submit():
         name =  form.name.data
         form.name.data = ''
+        flash("Form submitted sucessfully !!! ")
         
         
     return render_template("name.html", name=name,form=form)
