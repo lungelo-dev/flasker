@@ -1,6 +1,6 @@
 from flask import Flask, render_template, flash, request, redirect, url_for
 from datetime import datetime 
-#from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 #from flask_migrate import Migrate
 #from werkzeug.security import generate_password_hash, check_password_hash 
 from datetime import date
@@ -19,7 +19,27 @@ from wtforms.validators import DataRequired
 
 #create a flask instance
 app = Flask(__name__)
+#app.config['SQLALCHEMY_DATABASE_URI']= "sqlite:///users.db"
 app.config['SECRET_KEY'] = "my super secret key"
+
+#Initialise the database
+db = SQLAlchemy(app)
+
+
+
+# Create a Model
+'''
+class Users(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(50), nullable=False, unique=True)
+    date_added = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    #Create a string 
+    def __repr__(self):
+        return '<Name %r>' % self.name
+
+'''
 
 
 #Create a Form Class
