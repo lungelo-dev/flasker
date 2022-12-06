@@ -1,6 +1,6 @@
 from flask import Flask, render_template, flash, request, redirect, url_for
 from datetime import datetime 
-from flask_sqlalchemy import SQLAlchemy
+#from flask_sqlalchemy import SQLAlchemy
 #from flask_migrate import Migrate
 #from werkzeug.security import generate_password_hash, check_password_hash 
 from datetime import date
@@ -23,7 +23,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = "my super secret key"
 
 #Initialise the database
-db = SQLAlchemy(app)
+#db = SQLAlchemy(app)
 
 
 
