@@ -1,17 +1,18 @@
-from flask import Flask, render_template, flash, request, redirect, url_for
-from datetime import datetime 
-#from flask_sqlalchemy import SQLAlchemy
+
 #from flask_migrate import Migrate
 #from werkzeug.security import generate_password_hash, check_password_hash 
-from datetime import date
 #from webforms import LoginForm, PostForm, UserForm, PasswordForm, NamerForm, SearchForm
 #from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 #from webforms import LoginForm, PostForm, UserForm, PasswordForm, NamerForm
 #from flask_ckeditor import CKEditor
 #from werkzeug.utils import secure_filename
 #import uuid as uuid
-import os
 
+
+import os
+from flask import Flask, render_template, flash, request, redirect, url_for
+from datetime import datetime 
+from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
@@ -19,16 +20,21 @@ from wtforms.validators import DataRequired
 
 #create a flask instance
 app = Flask(__name__)
-#app.config['SQLALCHEMY_DATABASE_URI']= "sqlite:///users.db"
-app.config['SECRET_KEY'] = "my super secret key"
+
+
+    
+app.config['SQLALCHEMY_DATABASE_URI']= 'sqlite:///users.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = 'my super secret key'
 
 #Initialise the database
-#db = SQLAlchemy(app)
+db = SQLAlchemy(app)
+
+app.app_context().push()
 
 
+#Create a Model
 
-# Create a Model
-'''
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
@@ -39,12 +45,10 @@ class Users(db.Model):
     def __repr__(self):
         return '<Name %r>' % self.name
 
-'''
-
 
 #Create a Form Class
 class NamerForm(FlaskForm):
-    name = StringField("What is your name" , validators=[DataRequired()])
+    name = StringField("What is your name ? " , validators=[DataRequired()])
     submit = SubmitField("Submit")
 
 
